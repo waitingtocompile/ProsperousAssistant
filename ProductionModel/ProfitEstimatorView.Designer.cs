@@ -178,7 +178,7 @@ namespace ProsperousAssistant.ProductionModel
 			this.CostsFlowPanel.Location = new System.Drawing.Point(-4, 0);
 			this.CostsFlowPanel.Margin = new System.Windows.Forms.Padding(0);
 			this.CostsFlowPanel.Name = "CostsFlowPanel";
-			this.CostsFlowPanel.Size = new System.Drawing.Size(307, 630);
+			this.CostsFlowPanel.Size = new System.Drawing.Size(309, 630);
 			this.CostsFlowPanel.TabIndex = 20;
 			this.CostsFlowPanel.WrapContents = false;
 			// 
@@ -197,7 +197,7 @@ namespace ProsperousAssistant.ProductionModel
 			this.CostsHeaderPanel.Location = new System.Drawing.Point(0, 0);
 			this.CostsHeaderPanel.Margin = new System.Windows.Forms.Padding(0);
 			this.CostsHeaderPanel.Name = "CostsHeaderPanel";
-			this.CostsHeaderPanel.Size = new System.Drawing.Size(307, 92);
+			this.CostsHeaderPanel.Size = new System.Drawing.Size(309, 92);
 			this.CostsHeaderPanel.TabIndex = 0;
 			// 
 			// label9
@@ -276,7 +276,7 @@ namespace ProsperousAssistant.ProductionModel
 			this.PriceModesPanel.Location = new System.Drawing.Point(0, 92);
 			this.PriceModesPanel.Margin = new System.Windows.Forms.Padding(0);
 			this.PriceModesPanel.Name = "PriceModesPanel";
-			this.PriceModesPanel.Size = new System.Drawing.Size(307, 140);
+			this.PriceModesPanel.Size = new System.Drawing.Size(309, 140);
 			this.PriceModesPanel.TabIndex = 1;
 			// 
 			// BuyModeLabel
@@ -374,7 +374,7 @@ namespace ProsperousAssistant.ProductionModel
 			this.ExpertisePanel.Controls.Add(this.ExpertiseAndFeesLabel);
 			this.ExpertisePanel.Location = new System.Drawing.Point(3, 235);
 			this.ExpertisePanel.Name = "ExpertisePanel";
-			this.ExpertisePanel.Size = new System.Drawing.Size(301, 46);
+			this.ExpertisePanel.Size = new System.Drawing.Size(303, 46);
 			this.ExpertisePanel.TabIndex = 18;
 			// 
 			// ExpertiseAndFeesTable
@@ -386,7 +386,7 @@ namespace ProsperousAssistant.ProductionModel
 			this.ExpertiseAndFeesTable.ColumnCount = 3;
 			this.ExpertiseAndFeesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 155F));
 			this.ExpertiseAndFeesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-			this.ExpertiseAndFeesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 71F));
+			this.ExpertiseAndFeesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 73F));
 			this.ExpertiseAndFeesTable.Controls.Add(this.FieldHeading, 0, 0);
 			this.ExpertiseAndFeesTable.Controls.Add(this.ProdFeeHeading, 1, 0);
 			this.ExpertiseAndFeesTable.Controls.Add(this.ExpertsHeading, 2, 0);
@@ -394,7 +394,7 @@ namespace ProsperousAssistant.ProductionModel
 			this.ExpertiseAndFeesTable.Name = "ExpertiseAndFeesTable";
 			this.ExpertiseAndFeesTable.RowCount = 1;
 			this.ExpertiseAndFeesTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.ExpertiseAndFeesTable.Size = new System.Drawing.Size(295, 17);
+			this.ExpertiseAndFeesTable.Size = new System.Drawing.Size(297, 17);
 			this.ExpertiseAndFeesTable.TabIndex = 18;
 			// 
 			// FieldHeading
@@ -816,6 +816,8 @@ namespace ProsperousAssistant.ProductionModel
 			this.Controls.Add(this.MainContainer);
 			this.Name = "ProfitEstimatorView";
 			this.Size = new System.Drawing.Size(1013, 669);
+			this.Load += new System.EventHandler(this.ProfitEstimatorView_Load);
+			this.SizeChanged += new System.EventHandler(this.ProfitEstimatorView_SizeChanged);
 			((System.ComponentModel.ISupportInitialize)(this.DataGrid)).EndInit();
 			this.Settings.ResumeLayout(false);
 			this.CostsTab.ResumeLayout(false);

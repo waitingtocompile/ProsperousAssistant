@@ -30,9 +30,9 @@ namespace ProsperousAssistant.ProductionModel
 
 		public string CalculatorPresetsDir => ProsperousAssistant.Settings.StoragePath + "\\profit_estimator_calculation";
 
-
-		private readonly int expandedSplitterDistance;
-		private readonly int collpasedSplitterDistance;
+		private readonly int sidePanelWidth;
+		private int expandedSplitterDistance => MainContainer.Width - sidePanelWidth;
+		private int collpasedSplitterDistance => MainContainer.Width;
 
 		private ProfitEstimatorSettings CalcSettings;
 		private Dictionary<string, NumericUpDown> ExpertSelectors = new Dictionary<string, NumericUpDown>();
@@ -44,8 +44,6 @@ namespace ProsperousAssistant.ProductionModel
 
 		private EditCommodityListForm editCommodityListForm;
 
-		private List<DataGridViewColumn> AccountingColumns = new List<DataGridViewColumn>();
-
 
 		public ProfitEstimatorView(CachedDataHelper dataHelper)
 		{
@@ -54,8 +52,7 @@ namespace ProsperousAssistant.ProductionModel
 			
 			DoubleBuffered = true;
 
-			expandedSplitterDistance = MainContainer.SplitterDistance;
-			collpasedSplitterDistance = 990;
+			sidePanelWidth = MainContainer.Width - MainContainer.SplitterDistance;
 
 			LinkSettingsComponentsAndRead();
 			SetupDataGrid();
@@ -458,8 +455,11 @@ namespace ProsperousAssistant.ProductionModel
 			}
 		}
 
+		//seriously give this an optimisation pass, this is, by an enormous margin, the most expensive operation when the ui redraws
 		private void DataGrid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
 		{
+
+			
 			if (e.RowIndex < 0) return;
 			ProfitEstimator est = (ProfitEstimator)DataGrid.Rows[e.RowIndex].DataBoundItem;
 			ColorGroup colorGroup = ColorGroup.GetColor(est.Building);
@@ -515,6 +515,16 @@ namespace ProsperousAssistant.ProductionModel
 
 			e.Handled = true;
 			
+		}
+
+		private void ProfitEstimatorView_SizeChanged(object sender, EventArgs e)
+		{
+			MainContainer.SplitterDistance = Settings.Visible ? expandedSplitterDistance : collpasedSplitterDistance;
+		}
+
+		private void ProfitEstimatorView_Load(object sender, EventArgs e)
+		{
+			MainContainer.SplitterDistance = Settings.Visible ? expandedSplitterDistance : collpasedSplitterDistance;
 		}
 	}
 }
