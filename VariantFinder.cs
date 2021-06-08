@@ -12,6 +12,9 @@ namespace ProsperousAssistant
 {
 	public static class VariantFinder
 	{
+		//there currently isn't any UI for editing variant indicators at runtime, not sure if it's something I want to bother with
+
+
 		private static Dictionary<Recipe, string> DefinedVariantStrings = new Dictionary<Recipe, string>();
 		private static FlexibleReadWriteLock readWriteLock = new FlexibleReadWriteLock();
 
@@ -24,7 +27,11 @@ namespace ProsperousAssistant
 			});
 		}
 
-
+		//get a snapshot of the all current variant strings
+		public static Dictionary<Recipe, string> CopyVariantStrings()
+		{
+			return readWriteLock.RunInRead(() => new Dictionary<Recipe, string>(DefinedVariantStrings));
+		}
 		public static void AddOrUpdateVariantString(Recipe recipe, string str)
 		{
 			readWriteLock.RunInWrite(() =>
@@ -55,7 +62,7 @@ namespace ProsperousAssistant
 				} }));
 		}
 
-		public static async Task ApplyRecipeStringsFromFile(CachedDataHelper dataHelper, StreamReader file, bool clearFirst)
+		public static async Task ApplyRecipeStringsFromFile(IVariableDataSource dataHelper, TextReader input, bool clearFirst)
 		{
 			Task<List<Material>> materialsTask = dataHelper.GetMaterialsAsync();
 			Task<List<Building>> buildingsTask = dataHelper.GetBuildingsAsync();
@@ -63,7 +70,7 @@ namespace ProsperousAssistant
 
 			IEnumerable<JObject> recipeObjects;
 
-			using (JsonTextReader jsonTextReader = new JsonTextReader(file))
+			using (JsonTextReader jsonTextReader = new JsonTextReader(input))
 			{
 				JArray jArray = (JArray)await JToken.ReadFromAsync(jsonTextReader);
 				recipeObjects = jArray.Children<JObject>();
@@ -72,7 +79,7 @@ namespace ProsperousAssistant
 
 			(Recipe, string)[] results = await Task.WhenAll<(Recipe, string)>(recipeObjects.Select(async jObject => (Recipe.FromJson(jObject, await materialsTask, await buildingsTask), jObject.GetValue("VariantString").ToObject<string>())));
 			var recipes = await recipesTask;
-			if (results.Any(pair => recipes.Contains(pair.Item1))) throw new InvalidOperationException("Unknown recipe in variant strings file");
+			if (results.Any(pair => !recipes.Contains(pair.Item1))) throw new InvalidOperationException("Unknown recipe in variant strings file");
 			await readWriteLock.RunInWriteAsync(() =>Task.Run(() =>
 			{
 				if (clearFirst) DefinedVariantStrings.Clear();
@@ -87,7 +94,7 @@ namespace ProsperousAssistant
 
 
 
-		public static async Task WriteVariantStringsToFile(StreamWriter file)
+		public static async Task WriteVariantStringsToFile(TextWriter output)
 		{
 			Task<JObject[]> task = readWriteLock.RunInReadAsync<JObject[]>(() => Task.WhenAll<JObject>(DefinedVariantStrings.Select(pair => Task.Run<JObject>(() =>
 			{
@@ -101,8 +108,9 @@ namespace ProsperousAssistant
 			{
 				jArray.Add(jObject);
 			}
-			using(JsonTextWriter writer = new JsonTextWriter(file))
+			using(JsonTextWriter writer = new JsonTextWriter(output))
 			{
+				writer.Formatting = Formatting.Indented;
 				await jArray.WriteToAsync(writer);
 			}
 		}

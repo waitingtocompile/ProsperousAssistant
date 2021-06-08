@@ -1,10 +1,12 @@
 ﻿using FIOSharp;
 using ProsperousAssistant.AuthForms;
 using ProsperousAssistant.ProductionModel;
+using ProsperousAssistant.Properties;
 using System;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ProsperousAssistant
@@ -74,7 +76,6 @@ namespace ProsperousAssistant
 
 				if (oracleClient.AuthKeyExpiry != null && !Settings.NeverPromptCreateKey && Settings.APIKey.Length == 0)
 				{
-					AssistantSetupWorker.ReportProgress(20, "Logged in to FIO API");
 					//we aren't using an API key and haven't been instructed to never prompt for one
 					CreateAPIKeyForm createAPIKeyForm = new CreateAPIKeyForm(oracleClient, loginWindow.PassField.Text);
 					createAPIKeyForm.ShowDialog();
@@ -87,11 +88,31 @@ namespace ProsperousAssistant
 
 
 			AssistantSetupWorker.ReportProgress(65, "Loading display settings");
+			
+			Task readingTask;
+			if (File.Exists($"Settings.StoragePath/variantStrings.json"))
+			{
+				using(StreamReader stream = File.OpenText($"Settings.StoragePath/variantStrings.json"))
+				{
+					readingTask = VariantFinder.ApplyRecipeStringsFromFile(dataHelper, stream, true);
+				}
+			}
+			else
+			{
+				using (MemoryStream memStream = new MemoryStream(Resources.DefaultVariantStrings))
+				{
+					using(StreamReader stream = new StreamReader(memStream))
+					{
+						readingTask = VariantFinder.ApplyRecipeStringsFromFile(dataHelper, stream, true);
+					}
+				}
+			}
+
 			ColorGroup.LoadActiveColorsFromFile();
+			readingTask.Wait();
 
 
-
-			AssistantSetupWorker.ReportProgress(60, "Preparing main window");
+			AssistantSetupWorker.ReportProgress(80, "Preparing main window");
 
 
 			//todo: replace with our actual main form
@@ -101,7 +122,7 @@ namespace ProsperousAssistant
 			control.Dock = DockStyle.Fill;
 
 			AssistantSetupWorker.ReportProgress(100, "Launching main window");
-
+			
 		}
 
 		private void AssistantSetupWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)

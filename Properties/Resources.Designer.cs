@@ -73,6 +73,16 @@ namespace ProsperousAssistant.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] DefaultVariantStrings {
+            get {
+                object obj = ResourceManager.GetObject("DefaultVariantStrings", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] DroidSans {
             get {
                 object obj = ResourceManager.GetObject("DroidSans", resourceCulture);

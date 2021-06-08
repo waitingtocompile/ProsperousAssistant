@@ -21,7 +21,7 @@ namespace ProsperousAssistant
 				string str = AppSettings["StoragePath"].Value;
 				if(str == "")
 				{
-					str = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}\\ProsperousAssistant";
+					str = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\Prosperous Assistant";
 					StoragePath = str;
 				}
 				return str;
