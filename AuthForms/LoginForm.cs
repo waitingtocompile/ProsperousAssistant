@@ -26,6 +26,7 @@ namespace ProsperousAssistant.AuthForms
 
 		private void TryLogin(object sender, EventArgs e)
 		{
+			UseWaitCursor = true;
 			HttpStatusCode result = oracle.LoginAs(UserField.Text, PassField.Text);
 			switch (result)
 			{
@@ -39,10 +40,12 @@ namespace ProsperousAssistant.AuthForms
 					StatusLabel.Text = "Something went wrong trying to log in. The server may be inacessible or offline.";
 					break;
 			}
+			UseWaitCursor = false;
 		}
 
 		private void TryKey(object sender, EventArgs e)
 		{
+			UseWaitCursor = true;
 			switch (oracle.LoginWithAPIKey(APIKeyField.Text))
 			{
 				case HttpStatusCode.OK:
@@ -56,6 +59,7 @@ namespace ProsperousAssistant.AuthForms
 					StatusLabel.Text = "Something went wrong trying to validate the API key. The server may be inacessible or offline.";
 					break;
 			}
+			UseWaitCursor = false;
 		}
 
 		private void Quit(object sender, EventArgs e)

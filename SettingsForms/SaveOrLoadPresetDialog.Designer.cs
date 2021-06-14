@@ -1,5 +1,5 @@
 ﻿
-namespace ProsperousAssistant
+namespace ProsperousAssistant.SettingsForms
 {
 	partial class SaveOrLoadPresetDialog
 	{

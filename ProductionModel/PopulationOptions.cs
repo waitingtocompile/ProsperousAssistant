@@ -133,7 +133,7 @@ namespace ProsperousAssistant.ProductionModel
 		{
 			Active = jObject.GetValue("IsActive").ToObject<bool>();
 			JObject consumablesObject = (JObject)jObject.GetValue("Consumables");
-			foreach(Material mat in enabledConsumables.Keys)
+			foreach(Material mat in enabledConsumables.Keys.ToList())
 			{
 				SetEnabled(mat, consumablesObject.GetValue(mat.Ticker).ToObject<bool>());
 			}

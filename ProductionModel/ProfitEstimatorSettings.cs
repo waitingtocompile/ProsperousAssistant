@@ -12,6 +12,7 @@ namespace ProsperousAssistant.ProductionModel
 	/// </summary>
 	public class ProfitEstimatorSettings
 	{
+
 		public static readonly decimal[] ExpertLevels = { 0m, 0.0306m, 0.0696m, 0.1248m, 0.1975m, 0.2840m };
 
 		//Used to configure the chosen time scale mode
@@ -241,7 +242,7 @@ namespace ProsperousAssistant.ProductionModel
 					population.FromJson((JObject)populationsObject.GetValue(population.PopulationType.Name));
 				}
 				JObject expertsObject = (JObject)jObject.GetValue("Experts");
-				foreach(string expertType in expertAllocation.Keys)
+				foreach(string expertType in expertAllocation.Keys.ToList())
 				{
 					SetExpertsForExpertise(expertType, expertsObject.GetValue(expertType).ToObject<int>());
 				}
