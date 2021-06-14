@@ -41,6 +41,12 @@ namespace ProsperousAssistant
 			set => UpdateConfigField("NeverPromptCreateKey", value.ToString());
 		}
 
+		public static string LastSettingPath
+		{
+			get => AppSettings["LastSettingPath"].Value;
+			set => UpdateConfigField("LastSettingPath", value);
+		}
+
 		public static void UpdateConfigField(string key, string value)
 		{
 			AppSettings[key].Value = value;

@@ -89,10 +89,11 @@ namespace ProsperousAssistant
 
 			AssistantSetupWorker.ReportProgress(65, "Loading display settings");
 			
+			//read from a custom file in our storage path if it exists. Otherwise, use the bundled defaults
 			Task readingTask;
-			if (File.Exists($"Settings.StoragePath/variantStrings.json"))
+			if (File.Exists($"{Settings.StoragePath}/variantStrings.json"))
 			{
-				using(StreamReader stream = File.OpenText($"Settings.StoragePath/variantStrings.json"))
+				using(StreamReader stream = File.OpenText($"{Settings.StoragePath}/variantStrings.json"))
 				{
 					readingTask = VariantFinder.ApplyRecipeStringsFromFile(dataHelper, stream, true);
 				}
@@ -101,14 +102,13 @@ namespace ProsperousAssistant
 			{
 				using (MemoryStream memStream = new MemoryStream(Resources.DefaultVariantStrings))
 				{
-					using(StreamReader stream = new StreamReader(memStream))
-					{
-						readingTask = VariantFinder.ApplyRecipeStringsFromFile(dataHelper, stream, true);
-					}
+					using StreamReader stream = new StreamReader(memStream);
+					readingTask = VariantFinder.ApplyRecipeStringsFromFile(dataHelper, stream, true);
 				}
 			}
-
+			//load our colour settings 
 			ColorGroup.LoadActiveColorsFromFile();
+			//make sure that we've read our vatriants file correctly
 			readingTask.Wait();
 
 
@@ -116,10 +116,7 @@ namespace ProsperousAssistant
 
 
 			//todo: replace with our actual main form
-			MainForm = new TestForm();
-			var control = new ProfitEstimatorView(dataHelper);
-			MainForm.Controls.Add(control);
-			control.Dock = DockStyle.Fill;
+			MainForm = new MainForm(dataHelper);
 
 			AssistantSetupWorker.ReportProgress(100, "Launching main window");
 			
@@ -140,9 +137,9 @@ namespace ProsperousAssistant
 			//bind our "main" form to also close this when it's done
 			MainForm.StartPosition = FormStartPosition.CenterParent;
 			MainForm.FormClosed += (sender, e) => Close();
-			Hide();
 			MainForm.Show();
 			MainForm.Focus();
+			Hide();
 		}
 
 		private void OnMouseMove(object sender, MouseEventArgs e)

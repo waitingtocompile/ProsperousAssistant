@@ -133,7 +133,7 @@ namespace ProsperousAssistant.ProductionModel
 			this.DataGrid.RowHeadersVisible = false;
 			this.DataGrid.RowTemplate.Height = 25;
 			this.DataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.DataGrid.Size = new System.Drawing.Size(695, 669);
+			this.DataGrid.Size = new System.Drawing.Size(712, 670);
 			this.DataGrid.TabIndex = 0;
 			this.DataGrid.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DataGrid_CellPainting);
 			this.DataGrid.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.DataGrid_RowPrePaint);
@@ -147,7 +147,7 @@ namespace ProsperousAssistant.ProductionModel
 			this.Settings.Margin = new System.Windows.Forms.Padding(0);
 			this.Settings.Name = "Settings";
 			this.Settings.SelectedIndex = 0;
-			this.Settings.Size = new System.Drawing.Size(314, 669);
+			this.Settings.Size = new System.Drawing.Size(324, 670);
 			this.Settings.TabIndex = 1;
 			// 
 			// CostsTab
@@ -157,7 +157,7 @@ namespace ProsperousAssistant.ProductionModel
 			this.CostsTab.Location = new System.Drawing.Point(4, 24);
 			this.CostsTab.Name = "CostsTab";
 			this.CostsTab.Padding = new System.Windows.Forms.Padding(3);
-			this.CostsTab.Size = new System.Drawing.Size(306, 641);
+			this.CostsTab.Size = new System.Drawing.Size(316, 642);
 			this.CostsTab.TabIndex = 0;
 			this.CostsTab.Text = "Costs";
 			this.CostsTab.UseVisualStyleBackColor = true;
@@ -178,7 +178,7 @@ namespace ProsperousAssistant.ProductionModel
 			this.CostsFlowPanel.Location = new System.Drawing.Point(-4, 0);
 			this.CostsFlowPanel.Margin = new System.Windows.Forms.Padding(0);
 			this.CostsFlowPanel.Name = "CostsFlowPanel";
-			this.CostsFlowPanel.Size = new System.Drawing.Size(309, 630);
+			this.CostsFlowPanel.Size = new System.Drawing.Size(312, 630);
 			this.CostsFlowPanel.TabIndex = 20;
 			this.CostsFlowPanel.WrapContents = false;
 			// 
@@ -197,7 +197,7 @@ namespace ProsperousAssistant.ProductionModel
 			this.CostsHeaderPanel.Location = new System.Drawing.Point(0, 0);
 			this.CostsHeaderPanel.Margin = new System.Windows.Forms.Padding(0);
 			this.CostsHeaderPanel.Name = "CostsHeaderPanel";
-			this.CostsHeaderPanel.Size = new System.Drawing.Size(309, 92);
+			this.CostsHeaderPanel.Size = new System.Drawing.Size(312, 92);
 			this.CostsHeaderPanel.TabIndex = 0;
 			// 
 			// label9
@@ -276,7 +276,7 @@ namespace ProsperousAssistant.ProductionModel
 			this.PriceModesPanel.Location = new System.Drawing.Point(0, 92);
 			this.PriceModesPanel.Margin = new System.Windows.Forms.Padding(0);
 			this.PriceModesPanel.Name = "PriceModesPanel";
-			this.PriceModesPanel.Size = new System.Drawing.Size(309, 140);
+			this.PriceModesPanel.Size = new System.Drawing.Size(312, 140);
 			this.PriceModesPanel.TabIndex = 1;
 			// 
 			// BuyModeLabel
@@ -374,7 +374,7 @@ namespace ProsperousAssistant.ProductionModel
 			this.ExpertisePanel.Controls.Add(this.ExpertiseAndFeesLabel);
 			this.ExpertisePanel.Location = new System.Drawing.Point(3, 235);
 			this.ExpertisePanel.Name = "ExpertisePanel";
-			this.ExpertisePanel.Size = new System.Drawing.Size(303, 46);
+			this.ExpertisePanel.Size = new System.Drawing.Size(306, 46);
 			this.ExpertisePanel.TabIndex = 18;
 			// 
 			// ExpertiseAndFeesTable
@@ -386,7 +386,7 @@ namespace ProsperousAssistant.ProductionModel
 			this.ExpertiseAndFeesTable.ColumnCount = 3;
 			this.ExpertiseAndFeesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 155F));
 			this.ExpertiseAndFeesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-			this.ExpertiseAndFeesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 73F));
+			this.ExpertiseAndFeesTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 76F));
 			this.ExpertiseAndFeesTable.Controls.Add(this.FieldHeading, 0, 0);
 			this.ExpertiseAndFeesTable.Controls.Add(this.ProdFeeHeading, 1, 0);
 			this.ExpertiseAndFeesTable.Controls.Add(this.ExpertsHeading, 2, 0);
@@ -394,7 +394,7 @@ namespace ProsperousAssistant.ProductionModel
 			this.ExpertiseAndFeesTable.Name = "ExpertiseAndFeesTable";
 			this.ExpertiseAndFeesTable.RowCount = 1;
 			this.ExpertiseAndFeesTable.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.ExpertiseAndFeesTable.Size = new System.Drawing.Size(297, 17);
+			this.ExpertiseAndFeesTable.Size = new System.Drawing.Size(300, 17);
 			this.ExpertiseAndFeesTable.TabIndex = 18;
 			// 
 			// FieldHeading
@@ -775,7 +775,7 @@ namespace ProsperousAssistant.ProductionModel
 			this.ViewTab.Location = new System.Drawing.Point(4, 24);
 			this.ViewTab.Name = "ViewTab";
 			this.ViewTab.Padding = new System.Windows.Forms.Padding(3);
-			this.ViewTab.Size = new System.Drawing.Size(306, 641);
+			this.ViewTab.Size = new System.Drawing.Size(316, 642);
 			this.ViewTab.TabIndex = 1;
 			this.ViewTab.Text = "View";
 			this.ViewTab.UseVisualStyleBackColor = true;
@@ -794,15 +794,15 @@ namespace ProsperousAssistant.ProductionModel
 			// 
 			this.MainContainer.Panel2.Controls.Add(this.SettingsToggleButton);
 			this.MainContainer.Panel2.Controls.Add(this.Settings);
-			this.MainContainer.Size = new System.Drawing.Size(1013, 669);
-			this.MainContainer.SplitterDistance = 695;
+			this.MainContainer.Size = new System.Drawing.Size(1040, 670);
+			this.MainContainer.SplitterDistance = 712;
 			this.MainContainer.TabIndex = 2;
 			// 
 			// SettingsToggleButton
 			// 
 			this.SettingsToggleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.SettingsToggleButton.Image = global::ProsperousAssistant.Properties.Resources.Settings_12x_16x;
-			this.SettingsToggleButton.Location = new System.Drawing.Point(291, 2);
+			this.SettingsToggleButton.Location = new System.Drawing.Point(301, 2);
 			this.SettingsToggleButton.Name = "SettingsToggleButton";
 			this.SettingsToggleButton.Size = new System.Drawing.Size(20, 20);
 			this.SettingsToggleButton.TabIndex = 0;
@@ -815,9 +815,10 @@ namespace ProsperousAssistant.ProductionModel
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.Controls.Add(this.MainContainer);
 			this.Name = "ProfitEstimatorView";
-			this.Size = new System.Drawing.Size(1013, 669);
+			this.Size = new System.Drawing.Size(1040, 670);
 			this.Load += new System.EventHandler(this.ProfitEstimatorView_Load);
 			this.SizeChanged += new System.EventHandler(this.ProfitEstimatorView_SizeChanged);
+			this.VisibleChanged += new System.EventHandler(this.ProfitEstimatorView_VisibleChanged);
 			((System.ComponentModel.ISupportInitialize)(this.DataGrid)).EndInit();
 			this.Settings.ResumeLayout(false);
 			this.CostsTab.ResumeLayout(false);

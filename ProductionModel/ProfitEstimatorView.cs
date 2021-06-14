@@ -1,6 +1,8 @@
-﻿using FIOSharp.Data;
+﻿using FIOSharp;
+using FIOSharp.Data;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ProsperousAssistant.SettingsForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,11 +10,12 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ProsperousAssistant.ProductionModel
 {
-	public partial class ProfitEstimatorView : UserControl
+	public partial class ProfitEstimatorView : UserControl, SavesState
 	{
 		private struct PopulationView
 		{
@@ -28,7 +31,7 @@ namespace ProsperousAssistant.ProductionModel
 			}
 		}
 
-		public string CalculatorPresetsDir => ProsperousAssistant.Settings.StoragePath + "\\profit_estimator_calculation";
+		public string CalculatorPresetsDir => ProsperousAssistant.Settings.StoragePath + "\\profit estimator presets";
 
 		private readonly int sidePanelWidth;
 		private int expandedSplitterDistance => MainContainer.Width - sidePanelWidth;
@@ -48,6 +51,8 @@ namespace ProsperousAssistant.ProductionModel
 		public ProfitEstimatorView(CachedDataHelper dataHelper)
 		{
 			InitializeComponent();
+			Directory.CreateDirectory(CalculatorPresetsDir);
+
 			CalcSettings = new ProfitEstimatorSettings(dataHelper);
 			
 			DoubleBuffered = true;
@@ -112,7 +117,10 @@ namespace ProsperousAssistant.ProductionModel
 
 			BindComboBox(ShipBoundingSelector, ShippingCostBoundingMode.ALL_MODES.Values, "Name");
 
-			ReadSettingsValues();
+			if (!ReadPresetFile($"{CalculatorPresetsDir}\\{ProsperousAssistant.Settings.LastSettingPath}"))
+			{
+				ReadSettingsValues();
+			}
 		}
 
 		private void SetupDataGrid()
@@ -138,13 +146,7 @@ namespace ProsperousAssistant.ProductionModel
 			CreateAndAddColumn("Building", "BuildingTicker");
 			CreateAndAddColumn("Outputs", "OutputIdentifier");
 			CreateAndAddColumn("Variant", "VariantIndicator");
-			CreateAndAddColumn("Materials", "MaterialCost", new DataGridViewFormattedNullableNumberCell() {FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
-			CreateAndAddColumn("Prod. Fee", "ProductionFee", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
-			CreateAndAddColumn("Consumables", "ConsumableCost", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
-			CreateAndAddColumn("Import", "ImportCost", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
-			CreateAndAddColumn("Export", "ExportCost", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
-			CreateAndAddColumn("Total Cost", "CycleCost", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
-			CreateAndAddColumn("Sale Value", "SalePrice", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
+
 			MakeColumnBold(CreateAndAddColumn("Total Profit", "CycleProfit", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE }));
 			CreateAndAddColumn("Profit %", "PercentageProfit", new DataGridViewFormattedNullableNumberCell() { FormatString = "P2" });
 			CreateAndAddColumn("Base Time", "BaseProductionTime", new DataGridViewFormattedNullableNumberCell() { FormatString = "N2" });
@@ -152,6 +154,14 @@ namespace ProsperousAssistant.ProductionModel
 			CreateAndAddColumn("Adjusted Time", "AdjustedProductionTime", new DataGridViewFormattedNullableNumberCell() { FormatString = "N2" });
 			MakeColumnBold(CreateAndAddColumn("Time Scaled Profit", "TimescaleProfit", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE }));
 
+			CreateAndAddColumn("Materials", "MaterialCost", new DataGridViewFormattedNullableNumberCell() {FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
+			CreateAndAddColumn("Prod. Fee", "ProductionFee", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
+			CreateAndAddColumn("Consumables", "ConsumableCost", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
+			CreateAndAddColumn("Import", "ImportCost", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
+			CreateAndAddColumn("Export", "ExportCost", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
+			CreateAndAddColumn("Total Cost", "CycleCost", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
+			CreateAndAddColumn("Sale Value", "SalePrice", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
+			
 		}
 
 		private DataGridViewColumn CreateAndAddColumn(string name, string propertyName = null, DataGridViewTextBoxCell cellTemplate = null)
@@ -400,7 +410,8 @@ namespace ProsperousAssistant.ProductionModel
 
 		private bool ReadPresetFile(string filePath)
 		{
-			using(StreamReader streamReader = new StreamReader(filePath))
+			if (!File.Exists(filePath)) return false;
+			using(StreamReader streamReader = File.OpenText(filePath))
 			{
 				using JsonTextReader jsonReader = new JsonTextReader(streamReader);
 				JObject jObject = (JObject)JToken.ReadFrom(jsonReader);
@@ -418,7 +429,7 @@ namespace ProsperousAssistant.ProductionModel
 
 		private bool WritePresetFile(string filePath)
 		{
-			using (StreamWriter streamWriter= new StreamWriter(filePath, false))
+			using (StreamWriter streamWriter= File.CreateText(filePath))
 			{
 				using JsonTextWriter jsonWriter = new JsonTextWriter(streamWriter);
 				jsonWriter.Formatting = Formatting.Indented;
@@ -525,6 +536,18 @@ namespace ProsperousAssistant.ProductionModel
 		private void ProfitEstimatorView_Load(object sender, EventArgs e)
 		{
 			MainContainer.SplitterDistance = Settings.Visible ? expandedSplitterDistance : collpasedSplitterDistance;
+		}
+
+		//save the current state for loading later
+		public void SaveState()
+		{
+			WritePresetFile($"{CalculatorPresetsDir}\\{ProsperousAssistant.Settings.LastSettingPath}");
+		}
+
+		private void ProfitEstimatorView_VisibleChanged(object sender, EventArgs e)
+		{
+			//this blocks the display thread updating, but I don't want to spin it off into it's own thread because the things we're fiddling with are decidedly *not* thread safe
+			SaveState();
 		}
 	}
 }
