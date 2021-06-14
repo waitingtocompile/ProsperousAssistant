@@ -294,5 +294,629 @@
       }
     ],
     "VariantString": "BEA"
+  },
+  {
+    "RecipeName": "1xGRN 1xBEA 1xNUT = 10xRAT",
+    "Duration": 21600,
+    "BuildingTicker": "FP",
+    "Inputs": [
+      {
+        "Ticker": "NUT",
+        "Amount": 1
+      },
+      {
+        "Ticker": "BEA",
+        "Amount": 1
+      },
+      {
+        "Ticker": "GRN",
+        "Amount": 1
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "RAT",
+        "Amount": 10
+      }
+    ],
+    "VariantString": "G/B/N"
+  },
+  {
+    "RecipeName": "1xMUS 1xNUT 1xMAI = 10xRAT",
+    "Duration": 21600,
+    "BuildingTicker": "FP",
+    "Inputs": [
+      {
+        "Ticker": "MAI",
+        "Amount": 1
+      },
+      {
+        "Ticker": "MUS",
+        "Amount": 1
+      },
+      {
+        "Ticker": "NUT",
+        "Amount": 1
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "RAT",
+        "Amount": 10
+      }
+    ],
+    "VariantString": "Mu/N/Ma"
+  },
+  {
+    "RecipeName": "1xMAI 1xBEA 1xVEG = 10xRAT",
+    "Duration": 21600,
+    "BuildingTicker": "FP",
+    "Inputs": [
+      {
+        "Ticker": "MAI",
+        "Amount": 1
+      },
+      {
+        "Ticker": "BEA",
+        "Amount": 1
+      },
+      {
+        "Ticker": "VEG",
+        "Amount": 1
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "RAT",
+        "Amount": 10
+      }
+    ],
+    "VariantString": "Ma/B/V"
+  },
+  {
+    "RecipeName": "1xMAI 1xBEA 1xNUT = 10xRAT",
+    "Duration": 21600,
+    "BuildingTicker": "FP",
+    "Inputs": [
+      {
+        "Ticker": "MAI",
+        "Amount": 1
+      },
+      {
+        "Ticker": "BEA",
+        "Amount": 1
+      },
+      {
+        "Ticker": "NUT",
+        "Amount": 1
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "RAT",
+        "Amount": 10
+      }
+    ],
+    "VariantString": "Ma/B/N"
+  },
+  {
+    "RecipeName": "1xMUS 1xNUT 1xGRN = 10xRAT",
+    "Duration": 21600,
+    "BuildingTicker": "FP",
+    "Inputs": [
+      {
+        "Ticker": "MUS",
+        "Amount": 1
+      },
+      {
+        "Ticker": "NUT",
+        "Amount": 1
+      },
+      {
+        "Ticker": "GRN",
+        "Amount": 1
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "RAT",
+        "Amount": 10
+      }
+    ],
+    "VariantString": "Mu/N/G"
+  },
+  {
+    "RecipeName": "1xMAI 1xALG 1xNUT = 10xRAT",
+    "Duration": 21600,
+    "BuildingTicker": "FP",
+    "Inputs": [
+      {
+        "Ticker": "NUT",
+        "Amount": 1
+      },
+      {
+        "Ticker": "ALG",
+        "Amount": 1
+      },
+      {
+        "Ticker": "MAI",
+        "Amount": 1
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "RAT",
+        "Amount": 10
+      }
+    ],
+    "VariantString": "Ma/A/N"
+  },
+  {
+    "RecipeName": "1xMAI 1xALG 1xVEG = 10xRAT",
+    "Duration": 21600,
+    "BuildingTicker": "FP",
+    "Inputs": [
+      {
+        "Ticker": "ALG",
+        "Amount": 1
+      },
+      {
+        "Ticker": "VEG",
+        "Amount": 1
+      },
+      {
+        "Ticker": "MAI",
+        "Amount": 1
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "RAT",
+        "Amount": 10
+      }
+    ],
+    "VariantString": "Ma/A/V"
+  },
+  {
+    "RecipeName": "1xMUS 1xVEG 1xGRN = 10xRAT",
+    "Duration": 21600,
+    "BuildingTicker": "FP",
+    "Inputs": [
+      {
+        "Ticker": "MUS",
+        "Amount": 1
+      },
+      {
+        "Ticker": "VEG",
+        "Amount": 1
+      },
+      {
+        "Ticker": "GRN",
+        "Amount": 1
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "RAT",
+        "Amount": 10
+      }
+    ],
+    "VariantString": "Mu/V/G"
+  },
+  {
+    "RecipeName": "1xGRN 1xALG 1xNUT = 10xRAT",
+    "Duration": 21600,
+    "BuildingTicker": "FP",
+    "Inputs": [
+      {
+        "Ticker": "GRN",
+        "Amount": 1
+      },
+      {
+        "Ticker": "ALG",
+        "Amount": 1
+      },
+      {
+        "Ticker": "NUT",
+        "Amount": 1
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "RAT",
+        "Amount": 10
+      }
+    ],
+    "VariantString": "G/A/N"
+  },
+  {
+    "RecipeName": "1xGRN 1xALG 1xVEG = 10xRAT",
+    "Duration": 21600,
+    "BuildingTicker": "FP",
+    "Inputs": [
+      {
+        "Ticker": "GRN",
+        "Amount": 1
+      },
+      {
+        "Ticker": "ALG",
+        "Amount": 1
+      },
+      {
+        "Ticker": "VEG",
+        "Amount": 1
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "RAT",
+        "Amount": 10
+      }
+    ],
+    "VariantString": "G/A/V"
+  },
+  {
+    "RecipeName": "1xMUS 1xVEG 1xMAI = 10xRAT",
+    "Duration": 21600,
+    "BuildingTicker": "FP",
+    "Inputs": [
+      {
+        "Ticker": "MUS",
+        "Amount": 1
+      },
+      {
+        "Ticker": "VEG",
+        "Amount": 1
+      },
+      {
+        "Ticker": "MAI",
+        "Amount": 1
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "RAT",
+        "Amount": 10
+      }
+    ],
+    "VariantString": "Mu/V/Ma"
+  },
+  {
+    "RecipeName": "1xGRN 1xBEA 1xVEG = 10xRAT",
+    "Duration": 21600,
+    "BuildingTicker": "FP",
+    "Inputs": [
+      {
+        "Ticker": "VEG",
+        "Amount": 1
+      },
+      {
+        "Ticker": "BEA",
+        "Amount": 1
+      },
+      {
+        "Ticker": "GRN",
+        "Amount": 1
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "RAT",
+        "Amount": 10
+      }
+    ],
+    "VariantString": "G/B/V"
+  },
+  {
+    "RecipeName": "10xH2O 1xPG = 10xDW",
+    "Duration": 17280,
+    "BuildingTicker": "FP",
+    "Inputs": [
+      {
+        "Ticker": "H2O",
+        "Amount": 10
+      },
+      {
+        "Ticker": "PG",
+        "Amount": 1
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "DW",
+        "Amount": 10
+      }
+    ],
+    "VariantString": "PG"
+  },
+  {
+    "RecipeName": "10xH2O = 7xDW",
+    "Duration": 8640,
+    "BuildingTicker": "FP",
+    "Inputs": [
+      {
+        "Ticker": "H2O",
+        "Amount": 10
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "DW",
+        "Amount": 7
+      }
+    ],
+    "VariantString": "No PG"
+  },
+  {
+    "RecipeName": "4xNS = 12xMUS",
+    "Duration": 43200,
+    "BuildingTicker": "HYF",
+    "Inputs": [
+      {
+        "Ticker": "NS",
+        "Amount": 4
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "MUS",
+        "Amount": 12
+      }
+    ],
+    "VariantString": "Hi NS"
+  },
+  {
+    "RecipeName": "1xNS = 4xMUS",
+    "Duration": 25920,
+    "BuildingTicker": "HYF",
+    "Inputs": [
+      {
+        "Ticker": "NS",
+        "Amount": 1
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "MUS",
+        "Amount": 4
+      }
+    ],
+    "VariantString": "Lo NS"
+  },
+  {
+    "RecipeName": "1xH2O = 2xBEA",
+    "Duration": 21600,
+    "BuildingTicker": "FRM",
+    "Inputs": [
+      {
+        "Ticker": "H2O",
+        "Amount": 1
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "BEA",
+        "Amount": 2
+      }
+    ],
+    "VariantString": "Lo H2O"
+  },
+  {
+    "RecipeName": "6xH2O = 4xBEA",
+    "Duration": 34560,
+    "BuildingTicker": "FRM",
+    "Inputs": [
+      {
+        "Ticker": "H2O",
+        "Amount": 6
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "BEA",
+        "Amount": 4
+      }
+    ],
+    "VariantString": "Hi H2O"
+  },
+  {
+    "RecipeName": "4xH2O = 4xGRN",
+    "Duration": 32400,
+    "BuildingTicker": "FRM",
+    "Inputs": [
+      {
+        "Ticker": "H2O",
+        "Amount": 4
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "GRN",
+        "Amount": 4
+      }
+    ],
+    "VariantString": "Hi H2O"
+  },
+  {
+    "RecipeName": "1xH2O = 4xGRN",
+    "Duration": 43200,
+    "BuildingTicker": "FRM",
+    "Inputs": [
+      {
+        "Ticker": "H2O",
+        "Amount": 1
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "GRN",
+        "Amount": 4
+      }
+    ],
+    "VariantString": "Lo H2O"
+  },
+  {
+    "RecipeName": "2xH2O = 1xRCO",
+    "Duration": 51840,
+    "BuildingTicker": "FRM",
+    "Inputs": [
+      {
+        "Ticker": "H2O",
+        "Amount": 2
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "RCO",
+        "Amount": 1
+      }
+    ],
+    "VariantString": "No NS"
+  },
+  {
+    "RecipeName": "2xH2O 4xNS = 2xRCO",
+    "Duration": 34560,
+    "BuildingTicker": "FRM",
+    "Inputs": [
+      {
+        "Ticker": "NS",
+        "Amount": 4
+      },
+      {
+        "Ticker": "H2O",
+        "Amount": 2
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "RCO",
+        "Amount": 2
+      }
+    ],
+    "VariantString": "NS"
+  },
+  {
+    "RecipeName": "4xHCP = 4xC",
+    "Duration": 86400,
+    "BuildingTicker": "INC",
+    "Inputs": [
+      {
+        "Ticker": "HCP",
+        "Amount": 4
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "C",
+        "Amount": 4
+      }
+    ],
+    "VariantString": "HCP"
+  },
+  {
+    "RecipeName": "4xMAI = 4xC",
+    "Duration": 86400,
+    "BuildingTicker": "INC",
+    "Inputs": [
+      {
+        "Ticker": "MAI",
+        "Amount": 4
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "C",
+        "Amount": 4
+      }
+    ],
+    "VariantString": "MAI"
+  },
+  {
+    "RecipeName": "4xHCP 2xMAI = 4xC",
+    "Duration": 57024,
+    "BuildingTicker": "INC",
+    "Inputs": [
+      {
+        "Ticker": "HCP",
+        "Amount": 4
+      },
+      {
+        "Ticker": "MAI",
+        "Amount": 2
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "C",
+        "Amount": 4
+      }
+    ],
+    "VariantString": "H/M"
+  },
+  {
+    "RecipeName": "4xGRN = 4xC",
+    "Duration": 86400,
+    "BuildingTicker": "INC",
+    "Inputs": [
+      {
+        "Ticker": "GRN",
+        "Amount": 4
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "C",
+        "Amount": 4
+      }
+    ],
+    "VariantString": "GRN"
+  },
+  {
+    "RecipeName": "4xHCP 2xGRN = 4xC",
+    "Duration": 57024,
+    "BuildingTicker": "INC",
+    "Inputs": [
+      {
+        "Ticker": "HCP",
+        "Amount": 4
+      },
+      {
+        "Ticker": "GRN",
+        "Amount": 2
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "C",
+        "Amount": 4
+      }
+    ],
+    "VariantString": "H/G"
+  },
+  {
+    "RecipeName": "4xHCP 2xGRN 2xMAI = 4xC",
+    "Duration": 28512,
+    "BuildingTicker": "INC",
+    "Inputs": [
+      {
+        "Ticker": "HCP",
+        "Amount": 4
+      },
+      {
+        "Ticker": "GRN",
+        "Amount": 2
+      },
+      {
+        "Ticker": "MAI",
+        "Amount": 2
+      }
+    ],
+    "Outputs": [
+      {
+        "Ticker": "C",
+        "Amount": 4
+      }
+    ],
+    "VariantString": "H/G/M"
   }
 ]
