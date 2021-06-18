@@ -2,6 +2,7 @@
 using System.Net;
 using System.Windows.Forms;
 using FIOSharp;
+using ProsperousAssistant.Util;
 
 namespace ProsperousAssistant.AuthForms
 {

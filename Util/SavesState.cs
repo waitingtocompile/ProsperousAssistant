@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProsperousAssistant
+namespace ProsperousAssistant.Util
 {
-	public interface SavesState
+	public interface ISavesState
 	{
 		public void SaveState();
 	}

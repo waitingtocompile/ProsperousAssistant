@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace ProsperousAssistant
+namespace ProsperousAssistant.Util
 {
 	public class ShippingCostBoundingMode
 	{
@@ -13,15 +13,15 @@ namespace ProsperousAssistant
 
 
 		public static readonly ShippingCostBoundingMode MASS = new ShippingCostBoundingMode("Mass",
-			(decimal mass, decimal volume, decimal maxMass, decimal maxVolume) => mass/maxMass);
+			(mass, volume, maxMass, maxVolume) => mass / maxMass);
 		public static readonly ShippingCostBoundingMode VOLUME = new ShippingCostBoundingMode("Volume",
-			(decimal mass, decimal volume, decimal maxMass, decimal maxVolume) => volume / maxVolume);
+			(mass, volume, maxMass, maxVolume) => volume / maxVolume);
 		public static readonly ShippingCostBoundingMode MAX = new ShippingCostBoundingMode("Max",
-			(decimal mass, decimal volume, decimal maxMass, decimal maxVolume) => Math.Max(volume / maxVolume, mass/maxMass));
+			(mass, volume, maxMass, maxVolume) => Math.Max(volume / maxVolume, mass / maxMass));
 		public static readonly ShippingCostBoundingMode MIN = new ShippingCostBoundingMode("Min",
-			(decimal mass, decimal volume, decimal maxMass, decimal maxVolume) => Math.Min(volume / maxVolume, mass / maxMass));
+			(mass, volume, maxMass, maxVolume) => Math.Min(volume / maxVolume, mass / maxMass));
 		public static readonly ShippingCostBoundingMode AVERAGE = new ShippingCostBoundingMode("Average",
-			(decimal mass, decimal volume, decimal maxMass, decimal maxVolume) => (volume / maxVolume + mass / maxMass)/2);
+			(mass, volume, maxMass, maxVolume) => (volume / maxVolume + mass / maxMass) / 2);
 
 
 		private ShippingCostBoundingMode(string name, Func<decimal, decimal, decimal, decimal, decimal> func)

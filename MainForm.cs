@@ -1,4 +1,5 @@
 ﻿using ProsperousAssistant.ProductionModel;
+using ProsperousAssistant.Util;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -11,9 +12,9 @@ namespace ProsperousAssistant
 
 		public ProfitEstimatorView ProfitEstimatorView { get; private set; }
 
-		private List<SavesState> savables = new List<SavesState>();
+		private List<ISavesState> savables = new List<ISavesState>();
 
-		private ConcurrentQueue<SavesState> queuedSaveOps = new ConcurrentQueue<SavesState>();
+		private ConcurrentQueue<ISavesState> queuedSaveOps = new ConcurrentQueue<ISavesState>();
 
 		public MainForm(CachedDataHelper dataHelper)
 		{
@@ -36,13 +37,13 @@ namespace ProsperousAssistant
 			newTabPage.Text = text;
 			control.Dock = DockStyle.Fill;
 			TabbedView.TabPages.Add(newTabPage);
-			if(control is SavesState savable)
+			if(control is ISavesState savable)
 			{
 				savables.Add(savable);
 			}
 		}
 
-		public void QueueToSave(SavesState savable)
+		public void QueueToSave(ISavesState savable)
 		{
 			queuedSaveOps.Enqueue(savable);
 			if (!SaveStatesWorker.IsBusy)
@@ -51,7 +52,7 @@ namespace ProsperousAssistant
 			}
 		}
 
-		public void QueueToSave(IEnumerable<SavesState> savables)
+		public void QueueToSave(IEnumerable<ISavesState> savables)
 		{
 			foreach(var savable in savables)
 			{
@@ -68,7 +69,7 @@ namespace ProsperousAssistant
 			while (!queuedSaveOps.IsEmpty)
 			{
 				//dequeue the first item and save it
-				if(queuedSaveOps.TryDequeue(out SavesState savable))
+				if(queuedSaveOps.TryDequeue(out ISavesState savable))
 				{
 					savable.SaveState();
 				}

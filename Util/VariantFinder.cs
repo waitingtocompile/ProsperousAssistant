@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System;
 
-namespace ProsperousAssistant
+namespace ProsperousAssistant.Util
 {
 	public static class VariantFinder
 	{
@@ -49,7 +49,8 @@ namespace ProsperousAssistant
 
 		public static async Task AddOrUpdateVariantStringAsync(Recipe recipe, string str)
 		{
-			await readWriteLock.RunInWriteAsync(() => Task.Run(() => {
+			await readWriteLock.RunInWriteAsync(() => Task.Run(() =>
+			{
 				{
 					if (str == null)
 					{
@@ -59,7 +60,8 @@ namespace ProsperousAssistant
 					{
 						DefinedVariantStrings[recipe] = str;
 					}
-				} }));
+				}
+			}));
 		}
 
 		public static async Task ApplyRecipeStringsFromFile(IVariableDataSource dataHelper, TextReader input, bool clearFirst)
@@ -77,18 +79,18 @@ namespace ProsperousAssistant
 			}
 
 
-			(Recipe, string)[] results = await Task.WhenAll<(Recipe, string)>(recipeObjects.Select(async jObject => (Recipe.FromJson(jObject, await materialsTask, await buildingsTask), jObject.GetValue("VariantString").ToObject<string>())));
+			(Recipe, string)[] results = await Task.WhenAll(recipeObjects.Select(async jObject => (Recipe.FromJson(jObject, await materialsTask, await buildingsTask), jObject.GetValue("VariantString").ToObject<string>())));
 			var recipes = await recipesTask;
 			if (results.Any(pair => !recipes.Contains(pair.Item1))) throw new InvalidOperationException("Unknown recipe in variant strings file");
-			await readWriteLock.RunInWriteAsync(() =>Task.Run(() =>
-			{
-				if (clearFirst) DefinedVariantStrings.Clear();
-				foreach((Recipe recipe, string str) in results)
-				{
-					DefinedVariantStrings[recipe] = str;
-				}
+			await readWriteLock.RunInWriteAsync(() => Task.Run(() =>
+			 {
+				 if (clearFirst) DefinedVariantStrings.Clear();
+				 foreach ((Recipe recipe, string str) in results)
+				 {
+					 DefinedVariantStrings[recipe] = str;
+				 }
 
-			}));
+			 }));
 		}
 
 
@@ -96,7 +98,7 @@ namespace ProsperousAssistant
 
 		public static async Task WriteVariantStringsToFile(TextWriter output)
 		{
-			Task<JObject[]> task = readWriteLock.RunInReadAsync<JObject[]>(() => Task.WhenAll<JObject>(DefinedVariantStrings.Select(pair => Task.Run<JObject>(() =>
+			Task<JObject[]> task = readWriteLock.RunInReadAsync(() => Task.WhenAll(DefinedVariantStrings.Select(pair => Task.Run(() =>
 			{
 				JObject jObject = pair.Key.ToJson();
 				jObject.Add("VariantString", pair.Value);
@@ -104,11 +106,11 @@ namespace ProsperousAssistant
 			}))));
 
 			JArray jArray = new JArray();
-			foreach(JObject jObject in await task)
+			foreach (JObject jObject in await task)
 			{
 				jArray.Add(jObject);
 			}
-			using(JsonTextWriter writer = new JsonTextWriter(output))
+			using (JsonTextWriter writer = new JsonTextWriter(output))
 			{
 				writer.Formatting = Formatting.Indented;
 				await jArray.WriteToAsync(writer);

@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using System.Text;
 using System.Windows.Forms;
 
-namespace ProsperousAssistant
+namespace ProsperousAssistant.Util
 {
-	
+
 	public class DataGridViewFormattedNullableNumberCell : DataGridViewTextBoxCell
 	{
 		//Oh god how did I do this to myself this is such a disgusting name

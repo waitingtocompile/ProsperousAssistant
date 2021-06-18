@@ -1,6 +1,7 @@
 ﻿using FIOSharp;
 using FIOSharp.Data;
 using Newtonsoft.Json.Linq;
+using ProsperousAssistant.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +43,7 @@ namespace ProsperousAssistant.ShipmentModel
 		public ExchangeData ImportExchange => IsArbitrageMode ? RemoteExchange : LocalExchange;
 		public ExchangeData FuelExchange => IsArbitrageMode && UseRemoteExchangeForFuelCosts ? RemoteExchange : LocalExchange;
 
-		public decimal TotalFuelCost => UtilHelper.GetFuelCost(FuelPriceMode, FuelExchange, ImportSF + ExportSF, ImportFF + ExportFF);
+		public decimal TotalFuelCost => Utils.GetFuelCost(FuelPriceMode, FuelExchange, ImportSF + ExportSF, ImportFF + ExportFF);
 		public decimal TotalImportMass => ImportRows.Values.Sum(row => row.TotalMass);
 		public decimal TotalImportVolume => ImportRows.Values.Sum(row => row.TotalVolume);
 		//import price
@@ -236,8 +237,8 @@ namespace ProsperousAssistant.ShipmentModel
 				IsArbitrageMode = jObject.GetValue("ArbitrageMode").ToObject<bool>();
 				PreserveQuantitiesOnAutofill = jObject.GetValue("PreserveAutofill").ToObject<bool>();
 				UseRemoteExchangeForFuelCosts = jObject.GetValue("RemoteFuel").ToObject<bool>();
-				LocalExchange = UtilHelper.GetExchangeByTicker(DataHelper, jObject.GetValue("LocalExchange").ToObject<string>());
-				RemoteExchange = UtilHelper.GetExchangeByTicker(DataHelper, jObject.GetValue("RemoteExchange").ToObject<string>());
+				LocalExchange = Utils.GetExchangeByTicker(DataHelper, jObject.GetValue("LocalExchange").ToObject<string>());
+				RemoteExchange = Utils.GetExchangeByTicker(DataHelper, jObject.GetValue("RemoteExchange").ToObject<string>());
 				ExportPriceMode = jObject.GetValue("ExportMode").ToObject<PriceMode>();
 				ImportPriceMode = jObject.GetValue("ImportMode").ToObject<PriceMode>();
 				FuelPriceMode = jObject.GetValue("FuelMode").ToObject<PriceMode>();

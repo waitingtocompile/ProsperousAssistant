@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace ProsperousAssistant
+namespace ProsperousAssistant.Util
 {
 	public class MaterialSortMode : IComparer<Material>
 	{

@@ -1,16 +1,14 @@
 ﻿using ProsperousAssistant.Properties;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
 
-namespace ProsperousAssistant
+namespace ProsperousAssistant.Util
 {
-	public static class FontHelper
+	public static class FontLoader
 	{
 		public static FontFamily DroidSans { get
 			{

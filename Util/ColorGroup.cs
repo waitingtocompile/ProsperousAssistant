@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using FIOSharp;
 using System.Diagnostics.CodeAnalysis;
 
-namespace ProsperousAssistant
+namespace ProsperousAssistant.Util
 {
 	public class ColorGroup : IEquatable<ColorGroup>
 	{
@@ -20,9 +20,16 @@ namespace ProsperousAssistant
 			public ActiveColorsChangedEventArgs(IReadOnlyDictionary<string, ColorGroup> newColors)
 			{
 				NewColors = newColors;
+
+				EditedColors = newColors
+					.Where(pair => !ActiveColors.ContainsKey(pair.Key) || ActiveColors[pair.Key].Equals(pair.Value))
+					.ToDictionary(pair => pair.Key, pair => pair.Value);
+				
+
 			}
 
 			public IReadOnlyDictionary<string, ColorGroup> NewColors { get; }
+			public IReadOnlyDictionary<string, ColorGroup> EditedColors { get; }
 			public bool SuppressFileWrite { get; set; } = false;
 			public bool Cancel { get; set; } = false;
 		}
@@ -34,12 +41,15 @@ namespace ProsperousAssistant
 
 		public static IReadOnlyDictionary<string, ColorGroup> ActiveColors {
 			get {
-				if (_activeColors == null) _activeColors = DEFAULT_COLORS;
-				return _activeColors;
+				lock(_activeColors)
+				{
+					if (_activeColors.Count == 0) _activeColors = DEFAULT_COLORS;
+					return _activeColors;
+				}
 			}
 		}
 
-		private static IReadOnlyDictionary<string, ColorGroup> _activeColors;
+		private static IReadOnlyDictionary<string, ColorGroup> _activeColors = new Dictionary<string, ColorGroup>();
 
 		public static void SetActiveColors(IEnumerable<ColorGroup> newColors)
 		{
@@ -48,7 +58,10 @@ namespace ProsperousAssistant
 			OnActiveColorsChanged?.Invoke(null, args);
 			if (args.Cancel) return;
 			CheckInvalidateCachedIcons(newDict);
-			_activeColors = newDict;
+			lock(_activeColors)
+			{
+				_activeColors = newDict;
+			}
 			if (!args.SuppressFileWrite)
 			{
 				WriteActiveColorsToFile();
@@ -120,7 +133,7 @@ namespace ProsperousAssistant
 			{
 				using JsonTextWriter jsonWriter = new JsonTextWriter(streamWriter);
 				jsonWriter.Formatting = Formatting.Indented;
-				JArray.FromObject(_activeColors.Values).WriteTo(jsonWriter);
+				JArray.FromObject(ActiveColors.Values).WriteTo(jsonWriter);
 			}
 		}
 
@@ -130,7 +143,7 @@ namespace ProsperousAssistant
 			List<Material> toDelete = new List<Material>();
 			foreach(var ImagePair in MaterialImages)
 			{
-				if(newColors[ImagePair.Key.Ticker] != _activeColors[ImagePair.Key.Ticker])
+				if(newColors[ImagePair.Key.Ticker] != ActiveColors[ImagePair.Key.Ticker])
 				{
 					toDelete.Add(ImagePair.Key);
 				}
@@ -153,9 +166,10 @@ namespace ProsperousAssistant
 		//get the color for a given building, or the default building colour if one isn't defined
 		public static ColorGroup GetColor(Building building)
 		{
-			if (ActiveColors.ContainsKey(building.Ticker))
+			
+			if (ActiveColors.TryGetValue(building.Ticker, out ColorGroup group))
 			{
-				return ActiveColors[building.Ticker];
+				return group;
 			}
 			else return ActiveColors["building"];
 		}
@@ -205,7 +219,7 @@ namespace ProsperousAssistant
 					using StringFormat format = new StringFormat();
 					format.Alignment = StringAlignment.Center;
 					format.LineAlignment = StringAlignment.Center;
-					graphics.DrawString(label, new Font(FontHelper.DroidSans, fontSize, FontStyle.Bold), brush, new Rectangle(0, 0, iconSize, iconSize), format);
+					graphics.DrawString(label, new Font(FontLoader.DroidSans, fontSize, FontStyle.Bold), brush, new Rectangle(0, 0, iconSize, iconSize), format);
 
 				}
 			}
@@ -222,11 +236,6 @@ namespace ProsperousAssistant
 		public Color Light { get; }
 		[JsonProperty(Required = Required.Always)]
 		public Color Text { get; }
-
-
-
-
-
 
 		private static Color ShiftColor(Color color, int amount)
 		{
@@ -309,6 +318,7 @@ namespace ProsperousAssistant
 		#endregion
 
 
+		//todo: consider offloading the defaults into a proper json file?
 		#region auto generated default category colors		
 		public static readonly ColorGroup DEFAULT_AGRICULTURAL_PRODUCTS = new ColorGroup("agricultural products",
 			Color.FromArgb(92, 18, 18),

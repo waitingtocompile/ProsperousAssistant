@@ -1,5 +1,4 @@
-﻿
-namespace ProsperousAssistant.ProductionModel
+﻿namespace ProsperousAssistant.ProductionModel
 {
 	partial class ProfitEstimatorView
 	{
@@ -70,7 +69,7 @@ namespace ProsperousAssistant.ProductionModel
 			this.ShippingSettingsPanel = new System.Windows.Forms.Panel();
 			this.IgnoreCommoditiesLabel = new System.Windows.Forms.Label();
 			this.EditIgnoreButton = new System.Windows.Forms.Button();
-			this.FillMarginSelector = new ProsperousAssistant.PercentageUpDown();
+			this.FillMarginSelector = new ProsperousAssistant.Util.PercentageUpDown();
 			this.label8 = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
 			this.MaxVolumeSelector = new System.Windows.Forms.NumericUpDown();
@@ -907,7 +906,7 @@ namespace ProsperousAssistant.ProductionModel
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.NumericUpDown MaxVolumeSelector;
 		private System.Windows.Forms.Label label8;
-		private PercentageUpDown FillMarginSelector;
+		private ProsperousAssistant.Util.PercentageUpDown FillMarginSelector;
 		private System.Windows.Forms.Label label9;
 		private System.Windows.Forms.ComboBox ExchangeSelector;
 		private System.Windows.Forms.Label IgnoreCommoditiesLabel;

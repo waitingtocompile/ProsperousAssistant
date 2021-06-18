@@ -1,8 +1,8 @@
-﻿using FIOSharp;
-using FIOSharp.Data;
+﻿using FIOSharp.Data;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ProsperousAssistant.SettingsForms;
+using ProsperousAssistant.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,12 +10,11 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace ProsperousAssistant.ProductionModel
 {
-	public partial class ProfitEstimatorView : UserControl, SavesState
+	public partial class ProfitEstimatorView : UserControl, ISavesState
 	{
 		private struct PopulationView
 		{
@@ -147,20 +146,20 @@ namespace ProsperousAssistant.ProductionModel
 			CreateAndAddColumn("Outputs", "OutputIdentifier");
 			CreateAndAddColumn("Variant", "VariantIndicator");
 
-			MakeColumnBold(CreateAndAddColumn("Total Profit", "CycleProfit", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE }));
+			MakeColumnBold(CreateAndAddColumn("Total Profit", "CycleProfit", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatCultures.ACCOUNTING_CULTURE }));
 			CreateAndAddColumn("Profit %", "PercentageProfit", new DataGridViewFormattedNullableNumberCell() { FormatString = "P2" });
 			CreateAndAddColumn("Base Time", "BaseProductionTime", new DataGridViewFormattedNullableNumberCell() { FormatString = "N2" });
 			CreateAndAddColumn("Speed Mod", "SpeedModifier", new DataGridViewFormattedNullableNumberCell() { FormatString = "P2" });
 			CreateAndAddColumn("Adjusted Time", "AdjustedProductionTime", new DataGridViewFormattedNullableNumberCell() { FormatString = "N2" });
-			MakeColumnBold(CreateAndAddColumn("Time Scaled Profit", "TimescaleProfit", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE }));
+			MakeColumnBold(CreateAndAddColumn("Time Scaled Profit", "TimescaleProfit", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatCultures.ACCOUNTING_CULTURE }));
 
-			CreateAndAddColumn("Materials", "MaterialCost", new DataGridViewFormattedNullableNumberCell() {FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
-			CreateAndAddColumn("Prod. Fee", "ProductionFee", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
-			CreateAndAddColumn("Consumables", "ConsumableCost", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
-			CreateAndAddColumn("Import", "ImportCost", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
-			CreateAndAddColumn("Export", "ExportCost", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
-			CreateAndAddColumn("Total Cost", "CycleCost", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
-			CreateAndAddColumn("Sale Value", "SalePrice", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatHelper.ACCOUNTING_CULTURE });
+			CreateAndAddColumn("Materials", "MaterialCost", new DataGridViewFormattedNullableNumberCell() {FormatString = "C2", FormatProvider = FormatCultures.ACCOUNTING_CULTURE });
+			CreateAndAddColumn("Prod. Fee", "ProductionFee", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatCultures.ACCOUNTING_CULTURE });
+			CreateAndAddColumn("Consumables", "ConsumableCost", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatCultures.ACCOUNTING_CULTURE });
+			CreateAndAddColumn("Import", "ImportCost", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatCultures.ACCOUNTING_CULTURE });
+			CreateAndAddColumn("Export", "ExportCost", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatCultures.ACCOUNTING_CULTURE });
+			CreateAndAddColumn("Total Cost", "CycleCost", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatCultures.ACCOUNTING_CULTURE });
+			CreateAndAddColumn("Sale Value", "SalePrice", new DataGridViewFormattedNullableNumberCell() { FormatString = "C2", FormatProvider = FormatCultures.ACCOUNTING_CULTURE });
 			
 		}
 

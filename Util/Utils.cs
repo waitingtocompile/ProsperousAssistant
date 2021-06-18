@@ -1,14 +1,12 @@
 ﻿using FIOSharp;
 using FIOSharp.Data;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace ProsperousAssistant
+namespace ProsperousAssistant.Util
 {
 	//an assortment of utility functions that don't really belong anywhere but are widely useful
-	public static class UtilHelper
+	public static class Utils
 	{
 		public static decimal GetFuelCost(PriceMode priceMode, ExchangeData exchange, int SF, int FF)
 		{

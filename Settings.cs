@@ -1,10 +1,6 @@
-﻿using ProsperousAssistant.Properties;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Configuration;
-using System.Drawing;
 using System.Reflection;
-using System.Text;
 
 namespace ProsperousAssistant
 {

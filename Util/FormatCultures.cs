@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
+﻿using System.Globalization;
 
-namespace ProsperousAssistant
+namespace ProsperousAssistant.Util
 {
-	public static class FormatHelper
+	public static class FormatCultures
 	{
 		public static readonly CultureInfo ACCOUNTING_CULTURE;
 
 
-		static FormatHelper()
+		static FormatCultures()
 		{
 			ACCOUNTING_CULTURE = (CultureInfo)CultureInfo.InvariantCulture.Clone();
 			ACCOUNTING_CULTURE.NumberFormat.NegativeSign = "()";
