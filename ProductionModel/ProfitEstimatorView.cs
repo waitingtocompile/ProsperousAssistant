@@ -450,22 +450,20 @@ namespace ProsperousAssistant.ProductionModel
 		}
 
 		//re-calculate the grid after after a settings change or new market data
+		//Because our underlying types can't be trusted to prompt updates we need to induce them properly
 		private void RefreshGrid()
 		{
 			DataGrid.Update();
 			DataGrid.Refresh();
 		}
 
-		private void DataGrid_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
-		{
-			ProfitEstimator est = (ProfitEstimator)DataGrid.Rows[e.RowIndex].DataBoundItem;
-			using (var brush = ColorGroup.GetColor(est.Building).CreateLinearGradientBrush(e.RowBounds))
-			{
-				e.Graphics.FillRectangle(brush, e.RowBounds);
-			}
-		}
-
-		//seriously give this an optimisation pass, this is, by an enormous margin, the most expensive operation when the ui redraws
+		//TODO:seriously give this an optimisation pass, this is, by an enormous margin, the most expensive operation when the ui redraws
+		//redrawing the rows is, at this point, a massive slowdown and usability issue, the entire application locks for a second or two while it redraws
+		//it might be worth abandoning the gradients entirely in the name of expedience
+		//caching brushes on a per-column basis might help?
+		//I'm still not entirely certain if it's the creation and disposal of the brushes that has the performance cost or if it's the draw operations themselves
+		//further testing is needed
+		//that said work on something else for a while. You've already driven yourself mad 3 times on this (remember to update the next time you fuck things up)
 		private void DataGrid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
 		{
 

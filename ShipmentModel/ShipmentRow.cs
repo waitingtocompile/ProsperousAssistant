@@ -1,9 +1,5 @@
 ﻿using FIOSharp.Data;
-using Newtonsoft.Json.Linq;
 using ProsperousAssistant.Util;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ProsperousAssistant.ShipmentModel
 {

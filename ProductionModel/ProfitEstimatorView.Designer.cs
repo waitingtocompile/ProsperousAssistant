@@ -135,7 +135,6 @@
 			this.DataGrid.Size = new System.Drawing.Size(712, 670);
 			this.DataGrid.TabIndex = 0;
 			this.DataGrid.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.DataGrid_CellPainting);
-			this.DataGrid.RowPrePaint += new System.Windows.Forms.DataGridViewRowPrePaintEventHandler(this.DataGrid_RowPrePaint);
 			// 
 			// Settings
 			// 
